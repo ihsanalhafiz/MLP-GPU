@@ -2,10 +2,10 @@
 COMPILER = g++
 
 # Compiler flags for g++
-GXXFLAGS = -Wall -O3 -g -std=c++17
+GXXFLAGS = -Wall -O0 -g -std=c++17
 
 # Compiler flags for nvcc
-NVCCFLAGS = -O3 -std=c++17 -arch=sm_75
+NVCCFLAGS = -O0 -std=c++17 -arch=sm_75
 
 # Target executable
 TARGET = main_program

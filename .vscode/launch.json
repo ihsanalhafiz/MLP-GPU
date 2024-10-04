@@ -2,16 +2,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(g++ build and debug active file)",
+            "name": "g++ MNIST main",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/main_program",  // Path to your executable
-            "args": [],   // Arguments to pass to your program
+            "program": "${workspaceFolder}/main_program",  // Ensure this is the correct path to your executable
+            "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "externalConsole": true,  // If you want to see console output
-            "MIMode": "gdb",          // If you're on Linux or using WSL
+            "externalConsole": false,
+            "MIMode": "gdb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
@@ -19,21 +19,8 @@
                     "ignoreFailures": true
                 }
             ],
-            "miDebuggerPath": "/usr/bin/gdb",  // Ensure gdb is installed
-            "preLaunchTask": "build",          // Task to run before launching the debugger
-            "internalConsoleOptions": "neverOpen",
-            "osx": {
-                "program": "${workspaceFolder}/main_program",
-                "miDebuggerPath": "/usr/bin/lldb"
-            },
-            "linux": {
-                "program": "${workspaceFolder}/main_program",
-                "miDebuggerPath": "/usr/bin/gdb"
-            },
-            "windows": {
-                "program": "${workspaceFolder}/main_program.exe",
-                "miDebuggerPath": "C:/MinGW/bin/gdb.exe"
-            }
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "build"  // Ensure it runs the build task before starting the debugger
         }
     ]
 }

@@ -3,7 +3,7 @@
     "tasks": [
         {
             "label": "build",               // Label for the task
-            "type": "shell",                // Use shell to run the task
+            "type": "cppbuild",                // Use shell to run the task
             "command": "make",              // Run the make command
             "args": [],                     // Arguments passed to the command (empty since it just runs 'make')
             "group": {

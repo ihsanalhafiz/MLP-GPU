@@ -2,6 +2,23 @@
 #include "./src/MLP_Layer.h"
 #include "./src/MNIST.h"
 
+void allocateMemory(float**& input, float**& output, int nSamples, int nInputUnits, int nOutputUnits) {
+    input = new float*[nSamples];
+    output = new float*[nSamples];
+    for (int i = 0; i < nSamples; ++i) {
+        input[i] = new float[nInputUnits];
+        output[i] = new float[nOutputUnits];
+    }
+}
+
+void freeMemory(float**& input, float**& output, int nSamples) {
+    for (int i = 0; i < nSamples; ++i) {
+        delete[] input[i];
+        delete[] output[i];
+    }
+    delete[] input;
+    delete[] output;
+}
 
 
 int main()
@@ -15,36 +32,40 @@ int main()
     int nMiniBatch      = 10;
     float learningRate     = 0.1;
     
-    int nTrainingSet    = 60000;
-    int nTestSet        = 10000;
+    int nTrainingSet    = 1000; //60000;
+    int nTestSet        = 1000; //10000;
     
     float errMinimum = 0.01;    
-    int maxEpoch = 1000;
+    int maxEpoch = 100;
     
     //Allocate
     float **inputTraining			= new float*[nTrainingSet];
     float **desiredOutputTraining	= new float*[nTrainingSet];
+    float **inputTest			= new float*[nTestSet];
+    float **desiredOutputTest	= new float*[nTestSet];
     
     for(int i = 0;i < nTrainingSet;i++){
         inputTraining[i]			= new float[nInputUnit];
         desiredOutputTraining[i]	= new float[nOutputUnit];
     }
-    float **inputTest			= new float*[nTestSet];
-    float **desiredOutputTest	= new float*[nTestSet];
+
     
     for(int i = 0;i < nTestSet;i++){
         inputTest[i]			= new float[nInputUnit];
         desiredOutputTest[i]	= new float[nOutputUnit];
     }
     
+        // Allocate memory
+    //allocateMemory(inputTraining, desiredOutputTraining, nTrainingSet, nInputUnit, nOutputUnit);
+    //allocateMemory(inputTest, desiredOutputTest, nTestSet, nInputUnit, nOutputUnit);
 
     //MNIST Input Array Allocation and Initialization
     MNIST mnist;
-    mnist.ReadMNIST_Input("/home/miahafiz/MLP-GPU/Download/train-images-idx3-ubyte.gz", nTrainingSet, inputTraining);
-    mnist.ReadMNIST_Label("/home/miahafiz/MLP-GPU/Download/train-labels-idx1-ubyte.gz",nTrainingSet, desiredOutputTraining);
+    mnist.ReadMNIST_Label("/home/miahafiz/MLP-GPU/Download/train-labels-idx1-ubyte",nTrainingSet, desiredOutputTraining);
+    mnist.ReadMNIST_Input("/home/miahafiz/MLP-GPU/Download/train-images-idx3-ubyte", nTrainingSet, inputTraining);
     
-    mnist.ReadMNIST_Input("/home/miahafiz/MLP-GPU/Download/t10k-images-idx3-ubyte.gz",nTestSet, inputTest);
-    mnist.ReadMNIST_Label("/home/miahafiz/MLP-GPU/Download/t10k-labels-idx1-ubyte.gz",nTestSet, desiredOutputTest);
+    mnist.ReadMNIST_Input("/home/miahafiz/MLP-GPU/Download/t10k-images-idx3-ubyte",nTestSet, inputTest);
+    mnist.ReadMNIST_Label("/home/miahafiz/MLP-GPU/Download/t10k-labels-idx1-ubyte",nTestSet, desiredOutputTest);
     
     MLP_Network mlp;
     
@@ -145,7 +166,9 @@ int main()
     delete[] desiredOutputTraining;
     delete[] inputTest;
     delete[] desiredOutputTest;
-    
+    // Free memory at the end
+    //freeMemory(inputTraining, desiredOutputTraining, nTrainingSet);
+    //freeMemory(inputTest, desiredOutputTest, nTestSet);
  
     return 0;
 }
