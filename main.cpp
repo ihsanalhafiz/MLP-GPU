@@ -1,6 +1,6 @@
-#include "MLP_Network.h"
-#include "MLP_Layer.h"
-#include "MNIST.h"
+#include "./src/MLP_Network.h"
+#include "./src/MLP_Layer.h"
+#include "./src/MNIST.h"
 
 
 
@@ -38,18 +38,14 @@ int main()
     }
     
 
-
-    
     //MNIST Input Array Allocation and Initialization
     MNIST mnist;
-    mnist.ReadMNIST_Input("/Users/MLP_160713/train-images-idx3-ubyte", nTrainingSet, inputTraining);
-    mnist.ReadMNIST_Label("/Users/MLP_160713/train-labels-idx1-ubyte",nTrainingSet, desiredOutputTraining);
+    mnist.ReadMNIST_Input("/home/miahafiz/MLP-GPU/Download/train-images-idx3-ubyte.gz", nTrainingSet, inputTraining);
+    mnist.ReadMNIST_Label("/home/miahafiz/MLP-GPU/Download/train-labels-idx1-ubyte.gz",nTrainingSet, desiredOutputTraining);
     
-    mnist.ReadMNIST_Input("/Users/MLP_160713/t10k-images-idx3-ubyte",nTestSet, inputTest);
-    mnist.ReadMNIST_Label("/Users/MLP_160713/t10k-labels-idx1-ubyte",nTestSet, desiredOutputTest);
+    mnist.ReadMNIST_Input("/home/miahafiz/MLP-GPU/Download/t10k-images-idx3-ubyte.gz",nTestSet, inputTest);
+    mnist.ReadMNIST_Label("/home/miahafiz/MLP-GPU/Download/t10k-labels-idx1-ubyte.gz",nTestSet, desiredOutputTest);
     
-    
-
     MLP_Network mlp;
     
     mlp.Allocate(nInputUnit,nHiddenUnit,nOutputUnit,nHiddenLayer,nTrainingSet);

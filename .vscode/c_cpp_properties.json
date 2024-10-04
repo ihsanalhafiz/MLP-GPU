@@ -1,0 +1,23 @@
+{
+  "configurations": [
+      {
+          "name": "Linux",                             // Name of the configuration
+          "includePath": [
+              "${workspaceFolder}/src",                // Add your source folder
+              "/usr/include",                          // Default include path for system headers
+              "/usr/local/include"                     // Local include path, if needed
+          ],
+          "defines": [],                               // You can define macros here, like DEBUG, etc.
+          "compilerPath": "/usr/bin/g++",              // Path to your C++ compiler
+          "cStandard": "c11",                          // C standard to use (if applicable)
+          "cppStandard": "c++17",                      // C++ standard to use
+          "intelliSenseMode": "linux-gcc-x64",         // The IntelliSense mode (for Linux GCC)
+          "compilerArgs": [
+              "-Wall",                                 // Enable all warnings
+              "-O3",                                   // Use optimization flag for performance
+              "-g"                                     // Enable debugging information
+          ]
+      }
+  ],
+  "version": 4
+}
